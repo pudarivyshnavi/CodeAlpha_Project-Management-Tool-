@@ -53,28 +53,80 @@ A full-stack project management tool similar to Trello/Asana, built with modern 
 
 ```
 taskflow-pro/
-├── backend/                 # Node.js/Express backend
+├── backend/                      # Node.js/Express backend
 │   ├── config/
+│   │   └── database.js           # MongoDB connection configuration
 │   ├── controllers/
+│   │   ├── authController.js     # Authentication logic
+│   │   ├── projectController.js  # Project CRUD operations
+│   │   ├── taskController.js     # Task CRUD operations
+│   │   ├── commentController.js  # Comment management
+│   │   ├── notificationController.js # Notification handling
+│   │   ├── userController.js     # User management
+│   │   └── searchController.js   # Global search functionality
 │   ├── middleware/
+│   │   ├── auth.js               # JWT authentication & authorization
+│   │   ├── errorHandler.js       # Centralized error handling
+│   │   └── validation.js         # Input validation rules
 │   ├── models/
+│   │   ├── User.js               # User schema
+│   │   ├── Project.js            # Project schema
+│   │   ├── Task.js               # Task schema
+│   │   ├── Comment.js            # Comment schema
+│   │   ├── Notification.js       # Notification schema
+│   │   └── ActivityLog.js        # Activity log schema
 │   ├── routes/
+│   │   ├── auth.js               # Authentication routes
+│   │   ├── projects.js           # Project routes
+│   │   ├── tasks.js              # Task routes
+│   │   ├── comments.js           # Comment routes
+│   │   ├── notifications.js      # Notification routes
+│   │   ├── users.js              # User routes
+│   │   ├── upload.js             # File upload routes
+│   │   └── search.js             # Search routes
 │   ├── socket/
+│   │   └── socketHandler.js     # Socket.io event handlers
 │   ├── utils/
-│   ├── server.js
-│   └── package.json
-├── frontend/                # React frontend
+│   │   └── jwt.js                # JWT token generation & verification
+│   ├── uploads/                  # File upload directory (gitignored)
+│   ├── server.js                 # Express app & Socket.io server
+│   ├── package.json              # Backend dependencies
+│   ├── .env.example             # Environment variables template
+│   └── .gitignore               # Git ignore file
+├── frontend/                     # React frontend
 │   ├── src/
 │   │   ├── components/
+│   │   │   ├── KanbanBoard.jsx   # Drag-and-drop kanban board
+│   │   │   ├── Layout.jsx        # Main layout wrapper
+│   │   │   ├── Sidebar.jsx       # Navigation sidebar
+│   │   │   ├── TaskModal.jsx     # Task creation/editing modal
+│   │   │   ├── ActivityLog.jsx   # Project activity timeline
+│   │   │   └── GlobalSearch.jsx  # Global search component
 │   │   ├── context/
+│   │   │   ├── AuthContext.jsx   # Authentication state management
+│   │   │   └── DarkModeContext.jsx # Dark mode state management
 │   │   ├── pages/
+│   │   │   ├── Dashboard.jsx      # Project dashboard
+│   │   │   ├── Login.jsx          # Login page
+│   │   │   ├── Notifications.jsx  # Notifications page
+│   │   │   ├── ProjectBoard.jsx   # Project kanban board
+│   │   │   ├── Register.jsx       # Registration page
+│   │   │   └── Settings.jsx       # User settings
 │   │   ├── utils/
-│   │   ├── App.jsx
-│   │   └── main.jsx
-│   ├── index.html
-│   ├── package.json
-│   └── vite.config.js
-└── README.md
+│   │   │   ├── api.js            # Axios instance with interceptors
+│   │   │   └── socket.js         # Socket.io utilities
+│   │   ├── App.jsx               # React Router setup
+│   │   ├── main.jsx              # Entry point
+│   │   └── index.css             # Tailwind styles
+│   ├── index.html                # Root HTML
+│   ├── package.json              # Frontend dependencies
+│   ├── vite.config.js            # Vite configuration
+│   ├── tailwind.config.js        # Tailwind CSS configuration
+│   ├── postcss.config.js         # PostCSS configuration
+│   ├── .gitignore               # Git ignore file
+│   └── README.md                # Frontend documentation
+├── .gitignore                   # Root git ignore file
+└── README.md                    # Project documentation
 ```
 
 ## Installation
@@ -103,11 +155,8 @@ cp .env.example .env
 Edit `.env` with your configuration:
 ```
 PORT=5000
-MONGODB_URI=mongodb://localhost:27017/taskflow-pro
+MONGO_URI=mongodb://localhost:27017/taskflow-pro
 JWT_SECRET=your-super-secret-jwt-key-change-this-in-production
-JWT_REFRESH_SECRET=your-super-secret-refresh-key-change-this-in-production
-JWT_EXPIRE=15m
-JWT_REFRESH_EXPIRE=7d
 NODE_ENV=development
 ```
 
